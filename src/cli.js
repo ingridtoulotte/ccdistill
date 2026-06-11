@@ -14,9 +14,9 @@ const COMMANDS = {
   show: { run: require('./commands/show'), desc: 'Pretty-print one session transcript' },
 };
 
-const USAGE = `ccrecall ${version} — total recall for Claude Code (local-only, zero deps)
+const USAGE = `ccdistill ${version} — repeated Claude Code corrections → CLAUDE.md rules (local-only, zero deps)
 
-Usage: ccrecall <command> [options]
+Usage: ccdistill <command> [options]
 
 Commands:
 ${Object.entries(COMMANDS)
@@ -31,10 +31,10 @@ Global options:
   -v, --version      show version
 
 Examples:
-  ccrecall context                      # why does my session start 20% full?
-  ccrecall distill --prompt | claude -p # turn past corrections into CLAUDE.md rules
-  ccrecall search "race condition" --since 30d
-  ccrecall stats --project myapp
+  ccdistill context                      # why does my session start 20% full?
+  ccdistill distill --prompt | claude -p # turn past corrections into CLAUDE.md rules
+  ccdistill search "race condition" --since 30d
+  ccdistill stats --project myapp
 `;
 
 async function main() {
@@ -70,7 +70,7 @@ async function main() {
     return;
   }
   const cmd = COMMANDS[command];
-  if (!cmd) fail(`unknown command "${command}" — run ccrecall --help`);
+  if (!cmd) fail(`unknown command "${command}" — run ccdistill --help`);
 
   if (ctx.json) setColor(false);
   ctx.claudeDir = claudeDir(ctx.claudeDir);
@@ -78,7 +78,7 @@ async function main() {
 }
 
 function fail(msg) {
-  process.stderr.write('ccrecall: ' + msg + '\n');
+  process.stderr.write('ccdistill: ' + msg + '\n');
   process.exit(1);
 }
 

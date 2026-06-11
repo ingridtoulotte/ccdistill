@@ -5,7 +5,7 @@ Thanks for considering it. The bar for a great PR here is low friction, not low 
 ## Setup
 
 ```bash
-git clone https://github.com/OWNER/ccrecall && cd ccrecall
+git clone https://github.com/OWNER/ccdistill && cd ccdistill
 node --test          # that's it — zero dependencies, nothing to install
 ```
 

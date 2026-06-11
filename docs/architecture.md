@@ -46,11 +46,11 @@ Claude Code streams assistant output and may write the same message several time
 
 ### Static context audit (vs. proxies or live probes)
 
-`/context` answers "what is my context *right now*" — but costs a session. Proxy-based tools answer it live but require routing API traffic. ccrecall's audit is pure filesystem: it reads the same files Claude Code will inject (CLAUDE.md chain, memory index, skills frontmatter, MCP configs) and estimates. That makes it scriptable, CI-able, and zero-risk. MCP server costs are flat estimates today; `--probe` (launch server, call `tools/list`, measure schemas) is the planned upgrade.
+`/context` answers "what is my context *right now*" — but costs a session. Proxy-based tools answer it live but require routing API traffic. ccdistill's audit is pure filesystem: it reads the same files Claude Code will inject (CLAUDE.md chain, memory index, skills frontmatter, MCP configs) and estimates. That makes it scriptable, CI-able, and zero-risk. MCP server costs are flat estimates today; `--probe` (launch server, call `tools/list`, measure schemas) is the planned upgrade.
 
 ### Heuristic distill with an LLM escape hatch
 
-Signal patterns (EN + FR) catch the high-precision core: prohibitions, "always/never" rules, corrections, preferences. Long messages need a stronger signal because they're usually task specs. The output is explicitly a *draft* — and `--prompt | claude -p` hands refinement to the best judge available without ccrecall ever touching an API key.
+Signal patterns (EN + FR) catch the high-precision core: prohibitions, "always/never" rules, corrections, preferences. Long messages need a stronger signal because they're usually task specs. The output is explicitly a *draft* — and `--prompt | claude -p` hands refinement to the best judge available without ccdistill ever touching an API key.
 
 ## Testing
 

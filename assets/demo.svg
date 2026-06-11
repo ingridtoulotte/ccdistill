@@ -9,9 +9,9 @@
   <circle cx="22" cy="20" r="6" fill="#ff5f57"/>
   <circle cx="42" cy="20" r="6" fill="#febc2e"/>
   <circle cx="62" cy="20" r="6" fill="#28c840"/>
-  <text x="360" y="25" fill="#8b949e" text-anchor="middle" font-size="12">ccrecall — total recall for Claude Code</text>
+  <text x="360" y="25" fill="#8b949e" text-anchor="middle" font-size="12">ccdistill — repeated corrections &#8594; CLAUDE.md rules</text>
 
-  <text x="24" y="58" fill="#7ee787">$ <tspan fill="#e6edf3">ccrecall context</tspan></text>
+  <text x="24" y="58" fill="#7ee787">$ <tspan fill="#e6edf3">ccdistill context</tspan></text>
 
   <text x="24" y="88" fill="#e6edf3" font-weight="bold">CONTEXT STARTUP AUDIT  <tspan fill="#8b949e" font-weight="normal">D:\work\myapp</tspan></text>
 

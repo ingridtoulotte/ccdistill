@@ -3,7 +3,7 @@
 /**
  * Programmatic API. Everything the CLI can do is callable from Node:
  *
- *   const { scanAll, searchTranscripts, distill, auditContext } = require('ccrecall');
+ *   const { scanAll, searchTranscripts, distill, auditContext } = require('ccdistill');
  */
 module.exports = {
   ...require('./paths'),

@@ -8,18 +8,18 @@ Set Height 640
 Set Theme "Catppuccin Mocha"
 Set TypingSpeed 40ms
 
-Type "ccrecall context"
+Type "ccdistill context"
 Enter
 Sleep 4s
 
-Type "ccrecall distill"
+Type "ccdistill distill"
 Enter
 Sleep 5s
 
-Type "ccrecall search 'race condition' --since 30d"
+Type "ccdistill search 'race condition' --since 30d"
 Enter
 Sleep 4s
 
-Type "ccrecall stats"
+Type "ccdistill stats"
 Enter
 Sleep 5s

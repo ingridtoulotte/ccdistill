@@ -14,7 +14,7 @@ const { searchTranscripts } = require('../src/lib/search');
 const LINES = Number(process.argv[2]) || 200000;
 
 async function main() {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'ccrecall-bench-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'ccdistill-bench-'));
   const projDir = path.join(root, 'projects', 'D--bench-proj');
   fs.mkdirSync(projDir, { recursive: true });
   const file = path.join(projDir, 'bench-session.jsonl');

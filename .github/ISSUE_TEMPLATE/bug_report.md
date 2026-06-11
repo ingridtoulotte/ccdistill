@@ -7,7 +7,7 @@ labels: bug
 **Command run**
 
 ```bash
-ccrecall ...
+ccdistill ...
 ```
 
 **What happened** (paste output; redact transcript content as needed)
@@ -15,7 +15,7 @@ ccrecall ...
 **What you expected**
 
 **Environment**
-- ccrecall version (`ccrecall --version`):
+- ccdistill version (`ccdistill --version`):
 - OS:
 - Node (`node --version`):
 - Claude Code version (`claude --version`):

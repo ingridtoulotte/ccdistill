@@ -114,7 +114,7 @@ async function distill(dir, opts = {}) {
 }
 
 /**
- * Build a refinement prompt for `ccrecall distill --prompt | claude -p`.
+ * Build a refinement prompt for `ccdistill distill --prompt | claude -p`.
  */
 function refinementPrompt(candidates) {
   const lines = candidates.map((g) => `${g.count}x  ${g.text.replace(/\s+/g, ' ')}`);

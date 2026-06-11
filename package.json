@@ -1,19 +1,19 @@
 {
-  "name": "ccrecall",
+  "name": "ccdistill",
   "version": "0.1.0",
-  "description": "Total recall for Claude Code — distill past sessions into permanent CLAUDE.md rules, audit your context startup tax, search everything Claude ever did. Zero dependencies, 100% local.",
+  "description": "Distill your repeated Claude Code corrections into permanent CLAUDE.md rules — plus a context startup-tax audit and full-text search over every session. Zero dependencies, 100% local.",
   "license": "MIT",
-  "author": "ccrecall contributors",
+  "author": "ccdistill contributors",
   "repository": {
     "type": "git",
-    "url": "https://github.com/OWNER/ccrecall.git"
+    "url": "https://github.com/OWNER/ccdistill.git"
   },
-  "homepage": "https://github.com/OWNER/ccrecall#readme",
+  "homepage": "https://github.com/OWNER/ccdistill#readme",
   "bugs": {
-    "url": "https://github.com/OWNER/ccrecall/issues"
+    "url": "https://github.com/OWNER/ccdistill/issues"
   },
   "bin": {
-    "ccrecall": "src/cli.js"
+    "ccdistill": "src/cli.js"
   },
   "main": "src/lib/index.js",
   "engines": {
@@ -29,9 +29,11 @@
     "LICENSE"
   ],
   "keywords": [
+    "distill",
     "claude",
     "claude-code",
     "anthropic",
+    "corrections",
     "context-window",
     "claude-md",
     "memory",

@@ -18,12 +18,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install -g ccrecall
+      - run: npm install -g ccdistill
       - name: Audit context startup cost
         run: |
-          TOTAL=$(ccrecall context --json | jq .total)
+          TOTAL=$(ccdistill context --json | jq .total)
           echo "Context startup tax: ${TOTAL} tokens (budget: ${BUDGET})"
-          ccrecall context --no-color
+          ccdistill context --no-color
           if [ "$TOTAL" -gt "$BUDGET" ]; then
             echo "::error::Context startup tax ${TOTAL} exceeds budget ${BUDGET}."
             exit 1
