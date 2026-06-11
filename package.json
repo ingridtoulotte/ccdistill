@@ -1,0 +1,44 @@
+{
+  "name": "ccrecall",
+  "version": "0.1.0",
+  "description": "Total recall for Claude Code — distill past sessions into permanent CLAUDE.md rules, audit your context startup tax, search everything Claude ever did. Zero dependencies, 100% local.",
+  "license": "MIT",
+  "author": "ccrecall contributors",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OWNER/ccrecall.git"
+  },
+  "homepage": "https://github.com/OWNER/ccrecall#readme",
+  "bugs": {
+    "url": "https://github.com/OWNER/ccrecall/issues"
+  },
+  "bin": {
+    "ccrecall": "src/cli.js"
+  },
+  "main": "src/lib/index.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "node --test",
+    "bench": "node benchmarks/bench.js"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "claude",
+    "claude-code",
+    "anthropic",
+    "context-window",
+    "claude-md",
+    "memory",
+    "tokens",
+    "usage",
+    "observability",
+    "mcp",
+    "cli"
+  ]
+}

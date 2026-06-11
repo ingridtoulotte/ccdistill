@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="430" viewBox="0 0 720 430" font-family="ui-monospace,SFMono-Regular,Consolas,Menlo,monospace" font-size="13">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#161b22"/>
+      <stop offset="1" stop-color="#0d1117"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="430" rx="10" fill="url(#bg)" stroke="#30363d"/>
+  <circle cx="22" cy="20" r="6" fill="#ff5f57"/>
+  <circle cx="42" cy="20" r="6" fill="#febc2e"/>
+  <circle cx="62" cy="20" r="6" fill="#28c840"/>
+  <text x="360" y="25" fill="#8b949e" text-anchor="middle" font-size="12">ccrecall — total recall for Claude Code</text>
+
+  <text x="24" y="58" fill="#7ee787">$ <tspan fill="#e6edf3">ccrecall context</tspan></text>
+
+  <text x="24" y="88" fill="#e6edf3" font-weight="bold">CONTEXT STARTUP AUDIT  <tspan fill="#8b949e" font-weight="normal">D:\work\myapp</tspan></text>
+
+  <text x="24" y="116" fill="#8b949e">SOURCE                      TOKENS (est)                     of 200k</text>
+  <text x="24" y="138" fill="#e6edf3">Built-in tools (baseline)         <tspan fill="#79c0ff">14,000</tspan>  <tspan fill="#388bfd">██████████████████</tspan>  <tspan fill="#8b949e">7.0%</tspan></text>
+  <text x="24" y="160" fill="#e6edf3">MCP: github                        <tspan fill="#79c0ff">4,500</tspan>  <tspan fill="#388bfd">██████</tspan><tspan fill="#21262d">░░░░░░░░░░░░</tspan>  <tspan fill="#8b949e">2.3%</tspan></text>
+  <text x="24" y="182" fill="#e6edf3">System prompt (baseline)           <tspan fill="#79c0ff">3,000</tspan>  <tspan fill="#388bfd">████</tspan><tspan fill="#21262d">░░░░░░░░░░░░░░</tspan>  <tspan fill="#8b949e">1.5%</tspan></text>
+  <text x="24" y="204" fill="#e6edf3">User CLAUDE.md                     <tspan fill="#79c0ff">2,840</tspan>  <tspan fill="#388bfd">████</tspan><tspan fill="#21262d">░░░░░░░░░░░░░░</tspan>  <tspan fill="#8b949e">1.4%</tspan></text>
+  <text x="24" y="226" fill="#e6edf3">Project CLAUDE.md                  <tspan fill="#79c0ff">2,210</tspan>  <tspan fill="#388bfd">███</tspan><tspan fill="#21262d">░░░░░░░░░░░░░░░</tspan>  <tspan fill="#8b949e">1.1%</tspan></text>
+  <text x="24" y="248" fill="#e6edf3">Auto-memory MEMORY.md              <tspan fill="#79c0ff">1,380</tspan>  <tspan fill="#388bfd">██</tspan><tspan fill="#21262d">░░░░░░░░░░░░░░░░</tspan>  <tspan fill="#8b949e">0.7%</tspan></text>
+
+  <text x="24" y="282" fill="#f0b72f" font-weight="bold">TOTAL ~27,930 tokens — 14% of the 200k window gone before your first message</text>
+
+  <text x="24" y="312" fill="#e6edf3" font-weight="bold">RECOMMENDATIONS</text>
+  <text x="24" y="334" fill="#e6edf3">• User CLAUDE.md is ~2,840 tokens and loads every session — move</text>
+  <text x="24" y="352" fill="#e6edf3">  rarely-needed sections into skills Claude reads on demand.</text>
+  <text x="24" y="374" fill="#e6edf3">• 4 MCP servers configured — remove unused: <tspan fill="#79c0ff">claude mcp remove &lt;name&gt;</tspan></text>
+
+  <text x="24" y="406" fill="#8b949e">Estimates ~4 chars/token (±20%). Live numbers: /context inside Claude Code.</text>
+</svg>

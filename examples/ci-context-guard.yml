@@ -1,0 +1,30 @@
+# Fail a PR when the project's context startup tax crosses a budget.
+#
+# Why: CLAUDE.md files and .mcp.json grow by committee. Every token added
+# there is paid at the start of EVERY contributor's Claude Code session.
+# This guard makes that cost visible and bounded, like a bundle-size check.
+
+name: context-guard
+
+on: [pull_request]
+
+jobs:
+  context-budget:
+    runs-on: ubuntu-latest
+    env:
+      BUDGET: 30000 # tokens (estimate) allowed at session start
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install -g ccrecall
+      - name: Audit context startup cost
+        run: |
+          TOTAL=$(ccrecall context --json | jq .total)
+          echo "Context startup tax: ${TOTAL} tokens (budget: ${BUDGET})"
+          ccrecall context --no-color
+          if [ "$TOTAL" -gt "$BUDGET" ]; then
+            echo "::error::Context startup tax ${TOTAL} exceeds budget ${BUDGET}."
+            exit 1
+          fi
