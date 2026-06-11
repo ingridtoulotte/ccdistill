@@ -20,7 +20,7 @@ npx ccdistill stats
 Or from source:
 
 ```bash
-git clone https://github.com/OWNER/ccdistill && cd ccdistill
+git clone https://github.com/ingridtoulotte/ccdistill && cd ccdistill
 node src/cli.js --help     # zero dependencies — no npm install step needed
 ```
 

@@ -7,7 +7,7 @@
 Claude Code logs every session to `~/.claude/*.jsonl` — every correction, every command, every fix — then never reads them back.
 `ccdistill` mines that history: it surfaces the rules you keep re-teaching as ready-to-paste CLAUDE.md, audits the context tax you pay before typing a word, and makes everything Claude ever did searchable.
 
-[![CI](https://github.com/OWNER/ccdistill/actions/workflows/ci.yml/badge.svg)](https://github.com/OWNER/ccdistill/actions/workflows/ci.yml)
+[![CI](https://github.com/ingridtoulotte/ccdistill/actions/workflows/ci.yml/badge.svg)](https://github.com/ingridtoulotte/ccdistill/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/ccdistill)](https://www.npmjs.com/package/ccdistill)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 ![node](https://img.shields.io/badge/node-%E2%89%A518-brightgreen)

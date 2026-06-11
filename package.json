@@ -6,11 +6,11 @@
   "author": "ccdistill contributors",
   "repository": {
     "type": "git",
-    "url": "https://github.com/OWNER/ccdistill.git"
+    "url": "https://github.com/ingridtoulotte/ccdistill.git"
   },
-  "homepage": "https://github.com/OWNER/ccdistill#readme",
+  "homepage": "https://github.com/ingridtoulotte/ccdistill#readme",
   "bugs": {
-    "url": "https://github.com/OWNER/ccdistill/issues"
+    "url": "https://github.com/ingridtoulotte/ccdistill/issues"
   },
   "bin": {
     "ccdistill": "src/cli.js"
