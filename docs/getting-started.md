@@ -8,13 +8,13 @@
 ## Install
 
 ```bash
-npm install -g ccdistill
+npm install -g github:ingridtoulotte/ccdistill
 ```
 
 Or without installing:
 
 ```bash
-npx ccdistill stats
+npx github:ingridtoulotte/ccdistill stats
 ```
 
 Or from source:

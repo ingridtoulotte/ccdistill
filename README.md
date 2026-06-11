@@ -8,7 +8,6 @@ Claude Code logs every session to `~/.claude/*.jsonl` — every correction, ever
 `ccdistill` mines that history: it surfaces the rules you keep re-teaching as ready-to-paste CLAUDE.md, audits the context tax you pay before typing a word, and makes everything Claude ever did searchable.
 
 [![CI](https://github.com/ingridtoulotte/ccdistill/actions/workflows/ci.yml/badge.svg)](https://github.com/ingridtoulotte/ccdistill/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/ccdistill)](https://www.npmjs.com/package/ccdistill)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 ![node](https://img.shields.io/badge/node-%E2%89%A518-brightgreen)
 ![deps](https://img.shields.io/badge/dependencies-0-success)
@@ -36,7 +35,7 @@ Your transcripts are a goldmine you never reopen. `ccdistill` is the pickaxe.
 ## Install
 
 ```bash
-npm install -g ccdistill    # or: npx ccdistill
+npm install -g github:ingridtoulotte/ccdistill    # or run once: npx github:ingridtoulotte/ccdistill
 ```
 
 No config. No API key. No telemetry. It reads `~/.claude` and prints answers.
@@ -148,7 +147,7 @@ Reproduce: `npm run bench`.
 Every command takes `--json`. Fail a PR when context startup cost crosses a budget:
 
 ```yaml
-- run: npm install -g ccdistill
+- run: npm install -g github:ingridtoulotte/ccdistill
 - run: |
     TOTAL=$(ccdistill context --json | jq .total)
     if [ "$TOTAL" -gt 30000 ]; then

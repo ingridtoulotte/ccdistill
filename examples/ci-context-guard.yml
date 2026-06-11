@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install -g ccdistill
+      - run: npm install -g github:ingridtoulotte/ccdistill
       - name: Audit context startup cost
         run: |
           TOTAL=$(ccdistill context --json | jq .total)
