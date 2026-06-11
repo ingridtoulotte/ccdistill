@@ -14,9 +14,9 @@ const COMMANDS = {
   show: { run: require('./commands/show'), desc: 'Pretty-print one session transcript' },
 };
 
-const USAGE = `ccdistill ${version} — repeated Claude Code corrections → CLAUDE.md rules (local-only, zero deps)
+const USAGE = `teach2claude ${version} — repeated Claude Code corrections → CLAUDE.md rules (local-only, zero deps)
 
-Usage: ccdistill <command> [options]
+Usage: teach2claude <command> [options]
 
 Commands:
 ${Object.entries(COMMANDS)
@@ -31,10 +31,10 @@ Global options:
   -v, --version      show version
 
 Examples:
-  ccdistill context                      # why does my session start 20% full?
-  ccdistill distill --prompt | claude -p # turn past corrections into CLAUDE.md rules
-  ccdistill search "race condition" --since 30d
-  ccdistill stats --project myapp
+  teach2claude context                      # why does my session start 20% full?
+  teach2claude distill --prompt | claude -p # turn past corrections into CLAUDE.md rules
+  teach2claude search "race condition" --since 30d
+  teach2claude stats --project myapp
 `;
 
 async function main() {
@@ -70,7 +70,7 @@ async function main() {
     return;
   }
   const cmd = COMMANDS[command];
-  if (!cmd) fail(`unknown command "${command}" — run ccdistill --help`);
+  if (!cmd) fail(`unknown command "${command}" — run teach2claude --help`);
 
   if (ctx.json) setColor(false);
   ctx.claudeDir = claudeDir(ctx.claudeDir);
@@ -78,7 +78,7 @@ async function main() {
 }
 
 function fail(msg) {
-  process.stderr.write('ccdistill: ' + msg + '\n');
+  process.stderr.write('teach2claude: ' + msg + '\n');
   process.exit(1);
 }
 

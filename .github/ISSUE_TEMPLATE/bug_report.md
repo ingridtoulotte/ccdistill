@@ -7,7 +7,7 @@ labels: bug
 **Command run**
 
 ```bash
-ccdistill ...
+teach2claude ...
 ```
 
 **What happened** (paste output; redact transcript content as needed)
@@ -15,7 +15,7 @@ ccdistill ...
 **What you expected**
 
 **Environment**
-- ccdistill version (`ccdistill --version`):
+- teach2claude version (`teach2claude --version`):
 - OS:
 - Node (`node --version`):
 - Claude Code version (`claude --version`):

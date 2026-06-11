@@ -3,24 +3,24 @@
 ## Prerequisites
 
 - Node.js ≥ 18
-- Claude Code installed and used at least once (ccdistill reads its local data)
+- Claude Code installed and used at least once (teach2claude reads its local data)
 
 ## Install
 
 ```bash
-npm install -g github:ingridtoulotte/ccdistill
+npm install -g github:ingridtoulotte/Teach2Claude
 ```
 
 Or without installing:
 
 ```bash
-npx github:ingridtoulotte/ccdistill stats
+npx github:ingridtoulotte/Teach2Claude stats
 ```
 
 Or from source:
 
 ```bash
-git clone https://github.com/ingridtoulotte/ccdistill && cd ccdistill
+git clone https://github.com/ingridtoulotte/Teach2Claude && cd teach2claude
 node src/cli.js --help     # zero dependencies — no npm install step needed
 ```
 
@@ -29,7 +29,7 @@ node src/cli.js --help     # zero dependencies — no npm install step needed
 **1. See what your sessions cost you before you type:**
 
 ```bash
-ccdistill context
+teach2claude context
 ```
 
 Run it from a project directory — it picks up that project's CLAUDE.md, `.mcp.json` and auto-memory. Anything flagged in RECOMMENDATIONS is paid on *every* session start.
@@ -37,26 +37,26 @@ Run it from a project directory — it picks up that project's CLAUDE.md, `.mcp.
 **2. Find what you keep repeating:**
 
 ```bash
-ccdistill distill
+teach2claude distill
 ```
 
 Review the suggested block, paste the good rules into your CLAUDE.md. For higher-quality phrasing, let Claude refine its own homework:
 
 ```bash
-ccdistill distill --prompt | claude -p
+teach2claude distill --prompt | claude -p
 ```
 
 **3. Search your history:**
 
 ```bash
-ccdistill search "that bug you remember vaguely" --since 60d
-ccdistill show <session-id-from-results>
+teach2claude search "that bug you remember vaguely" --since 60d
+teach2claude show <session-id-from-results>
 ```
 
 **4. Check the damage:**
 
 ```bash
-ccdistill stats
+teach2claude stats
 ```
 
 ## Where the data comes from
@@ -74,7 +74,7 @@ Non-default install? Point at it with `--claude-dir <path>` or `CLAUDE_CONFIG_DI
 
 ## Custom model pricing
 
-Cost estimates use public per-MTok pricing for Opus/Sonnet/Haiku. Unknown models show `n/a` (never silently $0). Override or extend in `~/.ccdistill.json`:
+Cost estimates use public per-MTok pricing for Opus/Sonnet/Haiku. Unknown models show `n/a` (never silently $0). Override or extend in `~/.teach2claude.json`:
 
 ```json
 {

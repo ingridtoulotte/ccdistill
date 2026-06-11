@@ -6,7 +6,7 @@ const path = require('node:path');
 
 /**
  * Heuristic token estimate: ~4 characters per token for mixed prose/code.
- * Real tokenizers vary ±20%; ccdistill labels every estimate as such.
+ * Real tokenizers vary ±20%; teach2claude labels every estimate as such.
  */
 function estimateTokens(text) {
   if (!text) return 0;
@@ -15,7 +15,7 @@ function estimateTokens(text) {
 
 /**
  * USD per million tokens. Substring-matched against the model id, first hit
- * wins. Overridable via ~/.ccdistill.json: { "pricing": [{ "match": "...",
+ * wins. Overridable via ~/.teach2claude.json: { "pricing": [{ "match": "...",
  * "label": "...", "input": n, "output": n, "cacheRead": n, "cacheWrite": n }] }
  */
 const DEFAULT_PRICING = [
@@ -28,7 +28,7 @@ let cachedConfig;
 
 function loadConfig() {
   if (cachedConfig !== undefined) return cachedConfig;
-  const file = process.env.CCRECALL_CONFIG || path.join(os.homedir(), '.ccdistill.json');
+  const file = process.env.CCRECALL_CONFIG || path.join(os.homedir(), '.teach2claude.json');
   try {
     cachedConfig = JSON.parse(fs.readFileSync(file, 'utf8'));
   } catch {

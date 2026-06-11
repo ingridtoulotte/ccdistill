@@ -21,7 +21,7 @@
 
 - [ ] Incremental index (sqlite-free, append-only) for instant search over years of history
 - [ ] Optional local semantic search (opt-in embedding model, still offline)
-- [ ] TUI dashboard (`ccdistill ui`)
+- [ ] TUI dashboard (`teach2claude ui`)
 - [ ] Multi-agent transcript adapters (other CLI agents writing JSONL)
 
 ## v0.4 — team memory
@@ -33,7 +33,7 @@
 ## v1.0
 
 - [ ] Stable JSON schemas (semver-guaranteed) for all commands
-- [ ] Monorepo split: `@ccdistill/core` (lib) + `ccdistill` (CLI) + `@ccdistill/ui`
+- [ ] Monorepo split: `@teach2claude/core` (lib) + `teach2claude` (CLI) + `@teach2claude/ui`
 - [ ] Docs site
 
 Suggest or vote: open a [feature request](.github/ISSUE_TEMPLATE/feature_request.md).

@@ -65,7 +65,7 @@ module.exports = async function sessionsCmd(ctx) {
     ]);
   }
   process.stdout.write(table(rows, { align: ['left', 'left', 'right', 'right', 'right', 'right'] }) + '\n');
-  process.stdout.write(c.dim(`\n${shown.length} of ${sessions.length} session(s). Inspect one: ccdistill show <id>\n`));
+  process.stdout.write(c.dim(`\n${shown.length} of ${sessions.length} session(s). Inspect one: teach2claude show <id>\n`));
 };
 
 function sessionCost(s) {

@@ -12,7 +12,7 @@ Global options (every command):
 
 ---
 
-## `ccdistill context`
+## `teach2claude context`
 
 Static audit of everything injected into context at session start: baseline system prompt and built-in tools, CLAUDE.md files (cwd → root + user), auto-memory index, skills index, MCP servers.
 
@@ -31,7 +31,7 @@ JSON shape:
 
 Token numbers are estimates (~4 chars/token, ±20%). Baseline figures track recent Claude Code releases and drift with versions. MCP entries use a flat per-server estimate because tool schemas are only knowable by launching the server (planned: `--probe`).
 
-## `ccdistill distill`
+## `teach2claude distill`
 
 Mines user messages across all transcripts for correction/rule signals (English + French patterns), groups repeats, and prints candidates plus a suggested CLAUDE.md block.
 
@@ -43,7 +43,7 @@ Mines user messages across all transcripts for correction/rule signals (English 
 
 Heuristics, by design: short imperative messages need signal weight ≥ 3; long messages (>150 chars) need ≥ 5 since they are usually task specs, not rules. Only candidates ≤ 160 chars enter the suggested block. Always review before adopting.
 
-## `ccdistill search <query>`
+## `teach2claude search <query>`
 
 Full-text search over every transcript. Matches user/assistant text **and tool inputs** (the first 400 chars of each `tool_use` input), so commands and file paths are findable.
 
@@ -57,7 +57,7 @@ Full-text search over every transcript. Matches user/assistant text **and tool i
 
 Performance: the raw JSONL line is substring/regex-tested *before* JSON parsing, so non-matching lines cost one string scan.
 
-## `ccdistill stats`
+## `teach2claude stats`
 
 Whole-history aggregates: sessions, projects, message counts, top tools, per-model token usage (input/output/cache read/cache write) with cost estimates, 14-day activity sparkline.
 
@@ -65,12 +65,12 @@ Flags: `--project`, `--since`.
 
 Token counts come from the `usage` fields Claude Code records per assistant message; streamed rewrites of a message are deduplicated by `message.id` (last occurrence wins, matching how usage accumulates). Unknown models are listed but excluded from the total with an explicit note.
 
-## `ccdistill sessions`
+## `teach2claude sessions`
 
 Recent sessions, newest first: timestamp, project, duration, message count, tool calls, estimated cost, id, last summary.
 
 Flags: `--project`, `--since`, `--limit` (default 20).
 
-## `ccdistill show <id-prefix>`
+## `teach2claude show <id-prefix>`
 
 Pretty-prints one transcript: user/assistant turns, tool calls (`→ Bash {...}`), truncated tool results (`↳ …`), summaries. Accepts any unambiguous session-id prefix (the 8-char ids printed by `search` and `sessions` work).

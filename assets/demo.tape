@@ -8,18 +8,18 @@ Set Height 640
 Set Theme "Catppuccin Mocha"
 Set TypingSpeed 40ms
 
-Type "ccdistill context"
+Type "teach2claude context"
 Enter
 Sleep 4s
 
-Type "ccdistill distill"
+Type "teach2claude distill"
 Enter
 Sleep 5s
 
-Type "ccdistill search 'race condition' --since 30d"
+Type "teach2claude search 'race condition' --since 30d"
 Enter
 Sleep 4s
 
-Type "ccdistill stats"
+Type "teach2claude stats"
 Enter
 Sleep 5s

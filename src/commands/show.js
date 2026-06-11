@@ -7,7 +7,7 @@ const path = require('node:path');
 
 module.exports = async function showCmd(ctx) {
   const prefix = (ctx.args[0] || '').trim();
-  if (!prefix) throw new Error('usage: ccdistill show <session-id-prefix>');
+  if (!prefix) throw new Error('usage: teach2claude show <session-id-prefix>');
 
   const file = findTranscript(ctx.claudeDir, prefix);
   if (!file) throw new Error(`no session matching "${prefix}" under ${ctx.claudeDir}`);

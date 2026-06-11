@@ -16,7 +16,7 @@ module.exports = async function searchCmd(ctx) {
   const flags = parseFlags(ctx.args, SPEC);
   const query = flags._.join(' ').trim();
   if (!query) {
-    throw new Error('usage: ccdistill search <query> [--regex] [--role user|assistant] [--project x] [--since 30d] [--limit n]');
+    throw new Error('usage: teach2claude search <query> [--regex] [--role user|assistant] [--project x] [--since 30d] [--limit n]');
   }
   if (flags.role && flags.role !== 'user' && flags.role !== 'assistant') {
     throw new Error('--role must be "user" or "assistant"');
@@ -52,7 +52,7 @@ module.exports = async function searchCmd(ctx) {
     out.push('  ' + highlight(truncate(m.snippet, 160), query, flags.regex));
   }
   out.push('');
-  out.push(c.dim(`${matches.length} match(es). Open a session with: ccdistill show <id>`));
+  out.push(c.dim(`${matches.length} match(es). Open a session with: teach2claude show <id>`));
   process.stdout.write(out.join('\n') + '\n');
 };
 

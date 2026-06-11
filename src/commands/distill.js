@@ -15,7 +15,7 @@ module.exports = async function distillCmd(ctx) {
   const candidates = await distill(ctx.claudeDir, { project: flags.project, limit: flags.limit });
 
   if (flags.prompt) {
-    // Plain text on stdout so it pipes cleanly: ccdistill distill --prompt | claude -p
+    // Plain text on stdout so it pipes cleanly: teach2claude distill --prompt | claude -p
     process.stdout.write(refinementPrompt(candidates) + '\n');
     return;
   }
@@ -49,6 +49,6 @@ module.exports = async function distillCmd(ctx) {
   }
   out.push('```');
   out.push('');
-  out.push(c.dim('Refine with Claude itself:  ccdistill distill --prompt | claude -p'));
+  out.push(c.dim('Refine with Claude itself:  teach2claude distill --prompt | claude -p'));
   process.stdout.write(out.join('\n') + '\n');
 };

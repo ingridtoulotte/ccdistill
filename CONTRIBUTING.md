@@ -5,7 +5,7 @@ Thanks for considering it. The bar for a great PR here is low friction, not low 
 ## Setup
 
 ```bash
-git clone https://github.com/ingridtoulotte/ccdistill && cd ccdistill
+git clone https://github.com/ingridtoulotte/Teach2Claude && cd teach2claude
 node --test          # that's it — zero dependencies, nothing to install
 ```
 

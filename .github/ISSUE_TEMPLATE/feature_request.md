@@ -4,7 +4,7 @@ about: Propose a command, flag, audit source, or distill signal
 labels: enhancement
 ---
 
-**Problem** — what do you keep doing manually that ccdistill should do?
+**Problem** — what do you keep doing manually that teach2claude should do?
 
 **Proposed behavior** — ideal CLI invocation and output.
 
