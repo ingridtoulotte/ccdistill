@@ -2,51 +2,75 @@
 
 # Teach2Claude
 
-**Turn the corrections you keep repeating into permanent CLAUDE.md rules.**
+**Claude learns from how you correct it.**
 
-Claude Code logs every session to `~/.claude/*.jsonl` — every correction, every command, every fix — then never reads them back.
-`teach2claude` mines that history: it surfaces the rules you keep re-teaching as ready-to-paste CLAUDE.md, audits the context tax you pay before typing a word, and makes everything Claude ever did searchable.
+You've told Claude Code *"use pnpm, not npm"* five times this month. It's written down in your session logs — Claude just never reads them back.
+Teach2Claude mines those logs, finds the corrections you keep repeating, and turns them into permanent CLAUDE.md rules.
+
+Zero dependencies · 100% local · no API keys · no cloud
 
 [![CI](https://github.com/ingridtoulotte/Teach2Claude/actions/workflows/ci.yml/badge.svg)](https://github.com/ingridtoulotte/Teach2Claude/actions/workflows/ci.yml)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 ![node](https://img.shields.io/badge/node-%E2%89%A518-brightgreen)
 ![deps](https://img.shields.io/badge/dependencies-0-success)
 
-**Zero dependencies · 100% local · nothing ever leaves your machine**
-
-<img src="assets/demo.svg" alt="teach2claude context demo" width="720">
+<img src="assets/demo.svg" alt="teach2claude demo" width="720">
 
 </div>
 
 ---
 
-## The problem
+## Why this exists
 
-Claude Code writes everything to `~/.claude/projects/*.jsonl` — every correction you gave, every command it ran, every bug it fixed. Then it never reads any of it again.
+Claude Code logs every session to `~/.claude/projects/*.jsonl` — every correction you gave, every preference you stated, every "no, do it this way." Then it starts the next session knowing none of it.
 
-So you:
+So you live this loop:
 
-- **teach Claude the same thing twice** — "use pnpm, not npm" for the fifth time this month
-- **lose answers you already paid for** — "we debugged this exact race condition in March… in which session?"
-- **start every session with an invisible tax** — MCP tool schemas, CLAUDE.md files and memory indexes can eat 20%+ of your 200k window before `hello`
+- *"Use pnpm, not npm."* — said it Monday. Saying it again Thursday.
+- *"Stop adding comments I didn't ask for."* — third time this week.
+- *"Run the tests before committing."* — you could tattoo this on the terminal.
 
-Your transcripts are a goldmine you never reopen. `teach2claude` is the pickaxe.
+The fix Claude offers is CLAUDE.md: a rules file it actually reads every session. But you have to remember what to put in it — and the rules you most need are exactly the ones you're too busy repeating to write down.
 
-## Install
+**If you've corrected Claude twice for the same thing, that rule already exists in your history. Teach2Claude finds it.**
 
-```bash
-npm install -g github:ingridtoulotte/Teach2Claude    # or run once: npx github:ingridtoulotte/Teach2Claude
+## What it does
+
+- Scans your local Claude Code history (`~/.claude/projects/*.jsonl`)
+- Detects corrections you've given more than once (English and French)
+- Ranks them by repetition count and recency
+- Drafts them as a ready-to-paste CLAUDE.md block
+- Optionally pipes the draft through Claude itself for polish — no API key, just `| claude -p`
+- Also ships: context startup-tax audit, full-text history search, usage/cost stats
+- Reads your disk, writes your terminal. Zero network calls.
+
+## How it works
+
+```
+~/.claude history  →  detect repeated corrections  →  extract stable rules  →  CLAUDE.md  →  Claude stops forgetting
 ```
 
-No config. No API key. No telemetry. It reads `~/.claude` and prints answers.
+1. **Scan** — streams every session transcript on your machine.
+2. **Detect** — pattern-matches user messages that are corrections, prohibitions, or preferences.
+3. **Group** — normalizes and dedupes, so "use pnpm not npm" and "pnpm, not npm!" count as one rule said twice.
+4. **Extract** — anything repeated enough becomes a drafted rule, sorted by how often you've had to say it.
+5. **Reuse** — paste the block into CLAUDE.md. Claude reads it at the start of every future session.
 
-## The 60-second tour
+## Before → After
 
-### `teach2claude distill` — stop teaching Claude the same thing twice
-
-Mines every session for the corrections you keep repeating and drafts them as CLAUDE.md rules:
+**Before — every single session:**
 
 ```text
+> use pnpm, not npm
+> don't add comments unless I ask
+> run the tests before committing
+```
+
+**After — run once:**
+
+```bash
+$ teach2claude distill
+
 DISTILL — recurring corrections you keep giving Claude
 
  5×  use pnpm, not npm                                preference  2026-06-09
@@ -59,81 +83,62 @@ Suggested CLAUDE.md block (review before adopting):
 - don't add comments unless I ask
 ```
 
-Then let Claude itself polish them — no API key handling, it just pipes:
+Paste the block into CLAUDE.md. Done. Those three corrections never need typing again.
 
-```bash
-teach2claude distill --prompt | claude -p
-```
+## Why it's different
 
-### `teach2claude context` — find your context startup tax
+- **Prompt hacks** — "always remember to…" pasted at the top of every session. Decays the moment you forget to paste it.
+- **Hand-written memory files** — you write rules from memory, which means you write the ones you *remember* needing, not the ones you actually repeat most.
+- **AI wrapper apps** — your transcripts get uploaded somewhere, an API key gets involved, a subscription appears.
 
-Static audit of everything injected before your first message. No session needed, works in CI:
+Teach2Claude is none of these. It's an **automatic learning layer for Claude Code**: the rules come from evidence — what you actually said, counted and dated — and the output goes into the one file Claude already reads.
 
-```text
-CONTEXT STARTUP AUDIT  D:\work\myapp
-
-SOURCE                     TOKENS (est)                      of 200k
-MCP: github                       4,500  ██████████░░░░░░░░     2.3%
-Built-in tools (baseline)        14,000  ██████████████████     7.0%
-User CLAUDE.md                    2,840  ████░░░░░░░░░░░░░░     1.4%
-Project CLAUDE.md                 2,210  ███░░░░░░░░░░░░░░░     1.1%
-Auto-memory MEMORY.md             1,380  ██░░░░░░░░░░░░░░░░     0.7%
-
-TOTAL ~24,930 tokens — 12% of the 200k window gone before your first message
-
-RECOMMENDATIONS
-  • User CLAUDE.md is ~2840 tokens and loads every session — move rarely-needed
-    sections into skills or docs Claude reads on demand.
-  • 4 MCP servers configured — each injects its full tool schemas. Remove unused
-    ones: `claude mcp remove <name>`
-```
-
-### `teach2claude search` — everything Claude ever did, greppable
-
-Full-text search across every project, every session, including the commands inside tool calls:
-
-```bash
-teach2claude search "race condition" --since 30d
-teach2claude search "DROP TABLE" --role assistant     # what did it run, exactly?
-teach2claude search "migrate.*postgres" --regex --project myapp
-```
-
-### `teach2claude stats` — your whole history, quantified
-
-```text
-115 sessions · 9 projects · 2026-03-02 → 2026-06-11
-2,341 user msgs · 11,930 assistant msgs · 9,202 tool calls
-
-TOP TOOLS                MODELS                              est cost
-Bash    5,121 ██████████ opus    in 191k  out 1.7M  cache …  $442.06
-Edit    2,265 ████░░░░░░ sonnet  in 91    out 18k   cache …    $3.54
-…
-Estimated total: $445.96
-```
-
-### `teach2claude sessions` / `teach2claude show` — browse and replay
-
-```bash
-teach2claude sessions --since 7d        # recent sessions: duration, msgs, cost, summary
-teach2claude show ffccb46c              # pretty-print one transcript
-```
-
-## How it compares
-
-| | `teach2claude` | `/context` (built-in) | ccusage | history viewers |
+| | Teach2Claude | prompt hacks | manual CLAUDE.md | wrappers |
 |---|---|---|---|---|
-| Distill history → CLAUDE.md rules | ✅ | ❌ | ❌ | ❌ |
-| Context audit without burning a session | ✅ | ❌ (live only) | ❌ | ❌ |
-| Context guard in CI | ✅ `--json` | ❌ | ❌ | ❌ |
-| Cross-project full-text search | ✅ | ❌ | ❌ | ✅ (some) |
-| Cost & usage analytics | ✅ | ❌ | ✅ | partial |
-| Dependencies | **0** | — | many | many |
+| Finds rules automatically | ✓ | — | — | some |
+| Evidence-based (counts real corrections) | ✓ | — | — | — |
+| Persists across sessions | ✓ | — | ✓ | varies |
+| Fully local, no keys | ✓ | ✓ | ✓ | — |
+| Dependencies | **0** | — | — | many |
 
-The viewers show you your history. `teach2claude` **acts** on it: rules out of repetition, guardrails out of audits.
+## Install
+
+```bash
+npm install -g github:ingridtoulotte/Teach2Claude
+```
+
+```bash
+teach2claude distill                          # see what you keep repeating
+teach2claude distill --prompt | claude -p     # let Claude itself polish the rules
+```
+
+Or zero-install: `npx github:ingridtoulotte/Teach2Claude distill`
+
+No config. No API key. No telemetry. It reads `~/.claude` and prints answers.
+
+## What changes after you install it
+
+- You stop re-teaching Claude the same preference for the Nth time.
+- Claude behaves consistently across sessions and across projects.
+- Your CLAUDE.md grows from evidence, not from guesswork.
+- Context stops bleeding: repeated mid-session corrections become one line Claude reads at startup.
+
+## Also in the box
+
+```bash
+teach2claude context                    # audit tokens injected before your first message
+teach2claude search "race condition"    # full-text search across every session, every project
+teach2claude stats                      # usage, top tools, estimated cost across your history
+teach2claude sessions --since 7d        # browse recent sessions; `show <id>` replays one
+```
+
+Every command takes `--json` — including a [CI guard](examples/ci-context-guard.yml) that fails a PR when context startup cost crosses a budget.
+
+`teach2claude context` deserves a special mention: it statically audits everything injected into your window before you type a word (MCP schemas, CLAUDE.md files, memory indexes) — these routinely eat 20%+ of a 200k window before `hello`.
 
 ## Performance
 
-Streaming JSONL parser, raw-line prefilter before any JSON.parse:
+Streaming JSONL parser with a raw-line prefilter before any `JSON.parse`:
 
 ```text
 scan:   29.2 MB, 100,000 lines in 170 ms   (≈588,000 lines/s)
@@ -142,39 +147,13 @@ search: 100,000 lines in 48 ms             (≈2,000,000 lines/s)
 
 Reproduce: `npm run bench`.
 
-## JSON mode & CI guard
-
-Every command takes `--json`. Fail a PR when context startup cost crosses a budget:
-
-```yaml
-- run: npm install -g github:ingridtoulotte/Teach2Claude
-- run: |
-    TOTAL=$(teach2claude context --json | jq .total)
-    if [ "$TOTAL" -gt 30000 ]; then
-      echo "Context startup tax is $TOTAL tokens (budget: 30000)"; exit 1
-    fi
-```
-
-Full example: [`examples/ci-context-guard.yml`](examples/ci-context-guard.yml).
-
 ## Privacy
 
-`teach2claude` is read-only over your local `~/.claude` directory. It makes **zero network calls** — no telemetry, no update checks, no API requests. The `--prompt` flow only prints text; *you* choose to pipe it into `claude`.
-
-## Programmatic API
-
-```js
-const { scanAll, searchTranscripts, distill, auditContext } = require('teach2claude');
-const sessions = await scanAll(claudeDir);
-```
+Read-only over your local `~/.claude` directory. **Zero network calls** — no telemetry, no update checks, no API requests. The `--prompt` flow only prints text; *you* choose to pipe it into `claude`.
 
 ## Docs
 
-- [Getting started](docs/getting-started.md)
-- [Command reference](docs/commands.md)
-- [Architecture](docs/architecture.md)
-- [FAQ](docs/faq.md)
-- [Roadmap](ROADMAP.md)
+[Getting started](docs/getting-started.md) · [Command reference](docs/commands.md) · [Architecture](docs/architecture.md) · [FAQ](docs/faq.md) · [Roadmap](ROADMAP.md)
 
 ## Contributing
 
@@ -188,6 +167,6 @@ PRs welcome — the codebase is small, dependency-free Node and stays that way. 
 
 <div align="center">
 
-**If teach2claude saved you a "wait, I already explained this to Claude" moment — star the repo so others find it.** ⭐
+**If Teach2Claude saved you one "wait, I already told Claude this" moment — star the repo so others find it.** ⭐
 
 </div>
